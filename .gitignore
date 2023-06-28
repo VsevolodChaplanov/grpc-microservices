@@ -1,4 +1,5 @@
 build/
+generated
 *.pb.h
 *.pb.cpp
 
