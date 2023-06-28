@@ -24,16 +24,6 @@ target_link_libraries(${PINGPONG_PROTOBJ} PUBLIC
     CONAN_LIB::grpc_grpc++_unsecure)
 target_include_directories(${PINGPONG_PROTOBJ} PUBLIC 
     $<BUILD_INTERFACE:${PINGPONG_PROTO_BINARY_DIR}>)
-# asio_grpc_protobuf_generate(
-#     GENERATE_GRPC 
-#     GENERATE_MOCK_CODE
-#     OUT_VAR PINGPONG_PROTO_GENERATED_FILES
-#     USAGE_REQUIREMENT PUBLIC
-#     IMPORT_DIRS ${PINGPONG_PROTOFILES_DIR}
-#     TARGET ${PINGPONG_PROTOBJ}
-#     OUT_DIR ${PINGPONG_PROTO_BINARY_DIR}
-#     PROTOS ${PINGPONG_PROTIFILES})
-
 
 protobuf_generate(TARGET ${PINGPONG_PROTOBJ}
     PROTOS ${PINGPONG_PROTIFILES}
@@ -41,18 +31,6 @@ protobuf_generate(TARGET ${PINGPONG_PROTOBJ}
     IMPORT_DIRS ${PINGPONG_PROTOFILES_DIR}
     PROTOC_OUT_DIR ${PINGPONG_PROTO_BINARY_DIR}
 )
-
-# protobuf_generate(
-#     TARGET ${PINGPONG_PROTIFILES}
-#     OUT_VAR PINGPONG_PROTO_GENERATED_FILES
-#     LANGUAGE grpc
-#     PROTOS ${PINGPONG_PROTIFILES}
-#     GENERATE_EXTENSIONS .grpc.pb.h .grpc.pb.cc
-#     PLUGIN "protoc-gen-grpc=\$<TARGET_FILE:CONAN_LIB::grpc_grpc_plugin_support>" #gRPC::grpc_cpp_plugin
-#     PLUGIN_OPTIONS "generate_mock_code=true"
-#     IMPORT_DIRS ${PINGPONG_PROTOFILES_DIR}
-#     PROTOC_OUT_DIR "${PINGPONG_PROTO_BINARY_DIR}")
-
 
 add_library(${PINGPONG} STATIC 
     ${PINGPONG_HEADERS}
@@ -79,3 +57,24 @@ target_include_directories(${PINGPONG}-so PUBLIC
 target_link_libraries(${PINGPONG}-so PUBLIC
     Threads::Threads
 )
+
+# asio_grpc_protobuf_generate(
+#     GENERATE_GRPC 
+#     GENERATE_MOCK_CODE
+#     OUT_VAR PINGPONG_PROTO_GENERATED_FILES
+#     USAGE_REQUIREMENT PUBLIC
+#     IMPORT_DIRS ${PINGPONG_PROTOFILES_DIR}
+#     TARGET ${PINGPONG_PROTOBJ}
+#     OUT_DIR ${PINGPONG_PROTO_BINARY_DIR}
+#     PROTOS ${PINGPONG_PROTIFILES})
+
+# protobuf_generate(
+#     TARGET ${PINGPONG_PROTIFILES}
+#     OUT_VAR PINGPONG_PROTO_GENERATED_FILES
+#     LANGUAGE grpc
+#     PROTOS ${PINGPONG_PROTIFILES}
+#     GENERATE_EXTENSIONS .grpc.pb.h .grpc.pb.cc
+#     PLUGIN "protoc-gen-grpc=\$<TARGET_FILE:CONAN_LIB::grpc_grpc_plugin_support>" #gRPC::grpc_cpp_plugin
+#     PLUGIN_OPTIONS "generate_mock_code=true"
+#     IMPORT_DIRS ${PINGPONG_PROTOFILES_DIR}
+#     PROTOC_OUT_DIR "${PINGPONG_PROTO_BINARY_DIR}")
