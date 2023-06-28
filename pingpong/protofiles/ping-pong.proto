@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package ping;
+
+message Ping {
+    string ball = 1;
+    string anotherBall = 2;
+}
+
+message Pong {
+    string ball = 1;
+}
+
+service PingPong {
+    // One-One 
+    rpc ping (Ping) returns (Pong) { }
+    rpc ping2 (Ping) returns (Pong) { }
+
+    // One-Many
+    rpc lotsOfPongs(Ping) returns (stream Pong) { }
+    rpc lotsOfPongs2(Ping) returns (stream Pong) { }
+
+    // Many-Many
+    rpc gameOfPingPong (stream Ping) returns (stream Pong) { }
+}

@@ -1,0 +1,6 @@
+#ifndef GRPC_PINGPONG_PINGPONG_SERVER_PINGPONG_HPP
+#define GRPC_PINGPONG_PINGPONG_SERVER_PINGPONG_HPP
+
+#include <agrpc/asio_grpc.hpp>
+
+#endif
