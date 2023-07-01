@@ -1,25 +1,22 @@
 syntax = "proto3";
 
-package ping;
+option java_package = "ex.grpc";
 
-message Ping {
-    string ball = 1;
-    string anotherBall = 2;
+package mathtest;
+
+// Defines the service
+service MathTest {
+    // Function invoked to send the request
+    rpc sendRequest (MathRequest) returns (MathReply) {}
 }
 
-message Pong {
-    string ball = 1;
+// The request message containing requested numbers
+message MathRequest {
+    int32 a = 1;
+    int32 b = 2;
 }
 
-service PingPong {
-    // One-One 
-    rpc ping (Ping) returns (Pong) { }
-    rpc ping2 (Ping) returns (Pong) { }
-
-    // One-Many
-    rpc lotsOfPongs(Ping) returns (stream Pong) { }
-    rpc lotsOfPongs2(Ping) returns (stream Pong) { }
-
-    // Many-Many
-    rpc gameOfPingPong (stream Ping) returns (stream Pong) { }
+// The response message containing response
+message MathReply {
+    int32 result = 1;
 }
