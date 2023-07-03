@@ -15,7 +15,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_SKIP_RPATH TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
+include(cmake/GoBuild.cmake)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}")
 
 find_package(Boost "1.81" REQUIRED)
@@ -30,6 +30,7 @@ include_directories(${gRPC_INCLUDE_DIR})
 include_directories(${absl_INCLUDE_DIR})
 
 add_subdirectory(pingpong)
+add_subdirectory(pingpong_go)
 
 
 add_executable(${PROJECT_NAME})

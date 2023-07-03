@@ -16,3 +16,17 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  cpp_server_pingpong_mathtest:
+    image: gcc:latest
+    build:
+      context: cpp_server_pingpong_mathtest
+      build: Dockerfile
+
+  go_client_pingpong_mathtest:
+    image: golang:1.20
+    
+
+network:
+  docker_network:
+    name: internal_network
