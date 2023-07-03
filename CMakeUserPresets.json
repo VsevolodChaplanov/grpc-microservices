@@ -4,6 +4,7 @@
         "conan": {}
     },
     "include": [
-        "/home/vsevolod/coding/cpp/aiso-grpc/build/Debug/generators/CMakePresets.json"
+        "/home/vsevolod/coding/cpp/aiso-grpc/build/Debug/generators/CMakePresets.json",
+        "/home/vsevolod/coding/cpp/aiso-grpc/build/Release/generators/CMakePresets.json"
     ]
 }

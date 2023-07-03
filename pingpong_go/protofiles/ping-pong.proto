@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "ex.grpc";
+option go_package = "grpc_microservices.";
 
 package mathtest;
 

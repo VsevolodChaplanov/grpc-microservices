@@ -24,6 +24,7 @@ set(CMAKE_Go_COMPILER $ENV{GOROOT}/bin/go)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}" ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # add go cmake build integration feature
 include(cmake/flags.cmake)
+include(cmake/CMakeGenerateGolangRPC.cmake)
 include(cmake/golang.cmake)
 # Packages are provided by conan
 find_package(Boost "1.81" REQUIRED)
@@ -73,6 +74,8 @@ message(STATUS "Protobuf  ${protobuf_INCLUDE_DIR}")
 message(STATUS "asio-grpc include ${asio-grpc_INCLUDE_DIR}")
 message(STATUS "range-v3 include ${range-v3_INCLUDE_DIR}")
 message(STATUS "abseil include ${absl_INCLUDE_DIR}")
+
+message(STATUS "Protoc binary of conan installed package ${Protobuf_PROTOC_EXECUTABLE}")
 
 # Log conan provided targets
 get_property(importTargets DIRECTORY "${CMAKE_SOURCE_DIR}" PROPERTY IMPORTED_TARGETS)

@@ -1,18 +1,24 @@
-set(GOPATH "${CMAKE_CURRENT_BINARY_DIR}/go")
+if(NOT EXISTS $ENV{GOPATH})
+  set(GOPATH $ENV{GOPATH})  
+elseif(EXISTS ${CMAKE_GO_PATH})
+  set(GOPATH ${CMAKE_GO_PATH})
+else()
+  set(GOPATH "${CMAKE_CURRENT_BINARY_DIR}/go")
+endif()
+
 file(MAKE_DIRECTORY ${GOPATH})
 
 function(ExternalGoProject_Add TARG)
   add_custom_target(${TARG} env GOPATH=${GOPATH} ${CMAKE_Go_COMPILER} get ${ARGN})
 endfunction(ExternalGoProject_Add)
 
-function(add_go_executable NAME)
-  file(GLOB GO_SOURCE RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.go")
+function(add_go_executable NAME GO_SOURCES) 
   add_custom_command(OUTPUT ${OUTPUT_DIR}/.timestamp 
     COMMAND env GOPATH=${GOPATH} ${CMAKE_Go_COMPILER} build
-    -o "${CMAKE_CURRENT_BINARY_DIR}/${NAME}"
-    ${CMAKE_GO_FLAGS} ${GO_SOURCE}
+    -o "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${NAME}"
+    ${CMAKE_GO_FLAGS} ${GO_SOURCES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
-
+  
   add_custom_target(${NAME} ALL DEPENDS ${OUTPUT_DIR}/.timestamp ${ARGN})
   install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${NAME} DESTINATION bin)
 endfunction(add_go_executable)
