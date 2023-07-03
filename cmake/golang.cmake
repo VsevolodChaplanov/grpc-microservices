@@ -23,6 +23,12 @@ function(add_go_executable NAME GO_SOURCES)
   install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${NAME} DESTINATION bin)
 endfunction(add_go_executable)
 
+function(go_mod_tidy)
+   execute_process(
+    COMMAND ${GOPATH} mod tidy
+  )  
+endfunction(go_mod_tidy)
+
 
 function(ADD_GO_LIBRARY NAME BUILD_TYPE)
   if(BUILD_TYPE STREQUAL "STATIC")
