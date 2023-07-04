@@ -1,6 +1,6 @@
 {
   "json.schemaDownload.enable": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "clangd.path": "clangd",
   "clangd.checkUpdates": true,
   "clangd.onConfigChanged": "restart",
@@ -17,6 +17,8 @@
   "clangd.fallbackFlags": [
     "--std=c++20"
   ],
+  "clang-format.executable": "clang-format",
+  "clang-format.language.objective-cpp.enable": true,
   "cmake.generator": "Ninja",
   "cmake.sourceDirectory": "${workspaceFolder}/",
   "cmake.buildDirectory": "${workspaceFolder}/build/",
@@ -28,5 +30,5 @@
   },
   "cmake.configureOnOpen": false,
   "C_Cpp.formatting": "disabled",
-  "C_Cpp.intelliSenseEngine": "disabled"
+  "C_Cpp.intelliSenseEngine": "disabled",
 }

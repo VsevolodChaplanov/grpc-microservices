@@ -42,6 +42,7 @@ include_directories(${absl_INCLUDE_DIR})
 add_subdirectory(pingpong)
 add_subdirectory(pingpong_go)
 add_subdirectory(matrix_protofiles)
+add_subdirectory(matrix_server)
 
 # sandbox
 add_executable(${PROJECT_NAME})
