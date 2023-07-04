@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package matrix_distributed_computing;
+
+// Defines the service
+service MatrixMatrixDotProductService {
+    // Function invoked to send the request
+    rpc Multiply (MatrixMatrixDotRequest) returns (MatrixMatrixDotReply) {}
+}
+
+// The request message containing lhs matrix row and rhs vector numbers
+message MatrixMatrixDotRequest {
+    int32 matrix_row_ind = 1;
+    int32 matrix_column_ind = 2;
+    repeated float matrix_row_element = 3;
+    repeated float matrox_column_element = 4;
+}
+
+// The response of the product of the matrix row and vector result
+message MatrixMatrixDotReply {
+    int32 matrix_row_ind = 1;
+    int32 matrix_column_ind = 2;
+    double dot_result = 3;
+}

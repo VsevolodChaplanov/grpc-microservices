@@ -34,12 +34,14 @@ find_package(Protobuf "3.21.9" CONFIG REQUIRED)
 find_package(asio-grpc CONFIG REQUIRED)
 find_package(fmt "10" CONFIG REQUIRED)
 find_package(range-v3 CONFIG REQUIRED)
+find_package(GTest REQUIRED)
 # Populate grpc and abseil google std lib for all project to simplify work with generated grpc
 include_directories(${gRPC_INCLUDE_DIR})
 include_directories(${absl_INCLUDE_DIR})
 
 add_subdirectory(pingpong)
 add_subdirectory(pingpong_go)
+add_subdirectory(matrix_protofiles)
 
 # sandbox
 add_executable(${PROJECT_NAME})

@@ -14,6 +14,7 @@ class AsioGrpcRecipe(ConanFile):
         self.requires("range-v3/[~0.12]")
         self.requires("asio-grpc/2.4.0")
         self.requires("libpqxx/[>7.7.4]")
+        self.requires("gtest/cci.20210126")
 
         if self.settings.os == "Windows":
             self.requires("base64/[~0.4]")
