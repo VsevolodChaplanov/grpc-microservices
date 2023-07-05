@@ -36,7 +36,7 @@ RequestHandlerImpl::RequestHandlerImpl(agrpc::GrpcContext& context,
 
     agrpc::repeatedly_request(
             &MatrixMatrixDotProductService::AsyncService::RequestMultiply,
-            matrix_vector_service_,
+            matrix_matrix_service_,
             net::bind_executor(
                     context_,
                     [&](grpc::ServerContext& server_context, MatrixMatrixDotRequest& request,
