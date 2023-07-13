@@ -2,8 +2,8 @@ FROM gcc:latest as build
 
 RUN apt update && \
     apt install -y \
-      python3-pip \
-      cmake
+    python3-pip \
+    cmake
 RUN pip3 install conan --break-system-packages
 
 COPY conanfile.txt /app/
@@ -16,7 +16,7 @@ COPY ./pingpong /app/pingpong
 COPY CMakeLists.txt /app/ 
 
 RUN cd /app/build && \
-RUN cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release 
+    RUN cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release 
 RUN ./conanbuild.sh
 RUN cmake --build . -j6
 RUN ./deactivate_conanbuild.sh

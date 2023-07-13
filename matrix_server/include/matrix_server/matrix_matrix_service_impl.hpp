@@ -5,7 +5,7 @@
 
 namespace mms = matrix_distributed_computing;
 
-class MatrixMatrixServiceImpl final : public mms::MatrixMatrixDotProductService::AsyncService {
+class MatrixMatrixServiceImpl final : public mms::MatrixMatrixDotProductService::Service {
 public:
     grpc::Status Multiply(grpc::ServerContext* context,
                           const mms::MatrixMatrixDotRequest* request,
