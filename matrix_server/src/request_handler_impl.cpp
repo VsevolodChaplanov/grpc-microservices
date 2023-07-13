@@ -22,29 +22,31 @@ RequestHandlerImpl::RequestHandlerImpl(agrpc::GrpcContext& context,
       matrix_vector_service_{matrix_vector_service} {
     fmt::print("Initializing listener for matrix vector multiplyer service");
 
-    agrpc::repeatedly_request(
-            &MatrixVectorDotProductService::AsyncService::RequestMultiply,
-            matrix_vector_service_,
-            net::bind_executor(
-                    context_,
-                    [&](grpc::ServerContext& server_context, MatrixVectorDotRequest& request,
-                        grpc::ServerAsyncResponseWriter<MatrixVectorDotReply>& writer) -> net::awaitable<void> {
-                        MatrixVectorDotReply response;
-                        auto status = matrix_vector_service_.Multiply(&server_context, &request, &response);
-                        co_await agrpc::finish(writer, response, status);
-                    }));
-
-    agrpc::repeatedly_request(
-            &MatrixMatrixDotProductService::AsyncService::RequestMultiply,
-            matrix_matrix_service_,
-            net::bind_executor(
-                    context_,
-                    [&](grpc::ServerContext& server_context, MatrixMatrixDotRequest& request,
-                        grpc::ServerAsyncResponseWriter<MatrixMatrixDotReply>& writer) -> net::awaitable<void> {
-                        MatrixMatrixDotReply response;
-                        auto status = matrix_matrix_service_.Multiply(&server_context, &request, &response);
-                        co_await agrpc::finish(writer, response, status);
-                    }));
+    // agrpc::repeatedly_request(
+    //         &MatrixVectorDotProductService::AsyncService::RequestMultiply,
+    //         matrix_vector_service_,
+    //         net::bind_executor(
+    //                 context_,
+    //                 [&](grpc::ServerContext& server_context, MatrixVectorDotRequest& request,
+    //                     grpc::ServerAsyncResponseWriter<MatrixVectorDotReply>& writer) -> net::awaitable<void> {
+    //                     MatrixVectorDotReply response;
+    //                     auto status = matrix_vector_service_.Multiply(&server_context, &request, &response);
+    //                     co_await agrpc::finish(writer, response, status);
+    //                 }));
 
     fmt::print("Initializing listener for matrix matrix multiplyer service");
+
+    // agrpc::repeatedly_request(
+    //         &MatrixMatrixDotProductService::AsyncService::RequestMultiply,
+    //         matrix_matrix_service_,
+    //         net::bind_executor(
+    //                 context_,
+    //                 [&](grpc::ServerContext& server_context, MatrixMatrixDotRequest& request,
+    //                     grpc::ServerAsyncResponseWriter<MatrixMatrixDotReply>& writer) -> net::awaitable<void> {
+    //                     MatrixMatrixDotReply response;
+    //                     auto status = matrix_matrix_service_.Multiply(&server_context, &request, &response);
+    //                     co_await agrpc::finish(writer, response, status);
+    //                 }));
+
+    fmt::print("All is initialized");
 }

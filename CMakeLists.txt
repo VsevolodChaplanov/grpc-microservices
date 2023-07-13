@@ -35,31 +35,39 @@ find_package(asio-grpc CONFIG REQUIRED)
 find_package(fmt "10" CONFIG REQUIRED)
 find_package(range-v3 CONFIG REQUIRED)
 find_package(GTest REQUIRED)
+find_package(libpqxx CONFIG REQUIRED)
+find_package(Catch2 CONFIG REQUIRED)
 # Populate grpc and abseil google std lib for all project to simplify work with generated grpc
 include_directories(${gRPC_INCLUDE_DIR})
 include_directories(${absl_INCLUDE_DIR})
 
+include(CTest)
+include(Catch)
+
 add_subdirectory(pingpong)
-add_subdirectory(pingpong_go)
+# add_subdirectory(pingpong_go)
 add_subdirectory(matrix_protofiles)
 add_subdirectory(matrix_server)
+add_subdirectory(postgresql_driver)
 
 # sandbox
-add_executable(${PROJECT_NAME})
-target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
-target_include_directories(${PROJECT_NAME} PUBLIC
+add_executable(${PROJECT_NAME}_sandbox)
+target_sources(${PROJECT_NAME}_sandbox PRIVATE src/main.cpp)
+target_include_directories(${PROJECT_NAME}_sandbox PUBLIC
     boost::boost
     grpc::grpc
     fmt::fmt
     asio-grpc::asio-grpc
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(${PROJECT_NAME}_sandbox PUBLIC
     Threads::Threads
     boost::boost
     grpc::grpc
     fmt::fmt
     asio-grpc::asio-grpc
 )
+
+
 
 # Log version and dirs of packages provided by conan
 message(STATUS "boost version ${Boost_VERSION_STRING}")
@@ -69,6 +77,7 @@ message(STATUS "Protobuf version ${protobuf_VERSION_STRING}")
 message(STATUS "asio-grpc version ${asio-grpc_VERSION_STRING}")
 message(STATUS "range-v3 version ${range-v3_VERSION_STRING}")
 message(STATUS "abseil version ${absl_VERSION_STRING}")
+message(STATUS "libpqxx version ${libpqxx_VERSION_STRING}")
 
 message(STATUS "boost include ${Boost_INCLUDE_DIR}")
 message(STATUS "fmt include ${fmt_INCLUDE_DIR}")
@@ -76,7 +85,7 @@ message(STATUS "gRPC include ${gRPC_INCLUDE_DIR}")
 message(STATUS "Protobuf  ${protobuf_INCLUDE_DIR}")
 message(STATUS "asio-grpc include ${asio-grpc_INCLUDE_DIR}")
 message(STATUS "range-v3 include ${range-v3_INCLUDE_DIR}")
-message(STATUS "abseil include ${absl_INCLUDE_DIR}")
+message(STATUS "libpqxx include ${libpqxx_INCLUDE_DIR}")
 
 message(STATUS "Protoc binary of conan installed package ${Protobuf_PROTOC_EXECUTABLE}")
 
