@@ -5,7 +5,8 @@
 #include <matrix_server/server.hpp>
 
 int main(int argc, const char* argv[]) try {
-    MatrixMultiplyerServer server{"0.0.0.0", 8080};
+    MatrixMultiplyerServer server{"0.0.0.0", 50432, 2};
+
 } catch (const std::exception& ex) {
     fmt::println("error: {}", ex.what());
 }

@@ -48,6 +48,7 @@ add_subdirectory(pingpong)
 # add_subdirectory(pingpong_go)
 add_subdirectory(matrix_protofiles)
 add_subdirectory(matrix_server)
+add_subdirectory(matrix_client)
 add_subdirectory(postgresql_driver)
 
 # sandbox

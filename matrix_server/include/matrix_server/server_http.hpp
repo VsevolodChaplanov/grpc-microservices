@@ -20,6 +20,7 @@
 
 namespace net = boost::asio;
 namespace beast = boost::beast;
+namespace http = beast::http;
 namespace sys = boost::system;
 
 namespace generic {
@@ -46,7 +47,7 @@ namespace generic {
         virtual void HandleRequest(HttpRequest&& request) = 0;
     };
 
-    template<http::RequestHandlerConcept RequestHandler>
+    template<concepts::RequestHandlerConcept RequestHandler>
     class Session final : public SessionBase, public std::enable_shared_from_this<Session<RequestHandler>> {
     public:
         Session(tcp::socket&& socket, RequestHandler&& handler)
@@ -59,7 +60,7 @@ namespace generic {
         void HandleRequest(HttpRequest&& request) override;
     };
 
-    template<http::RequestHandlerConcept RequestHandler>
+    template<concepts::RequestHandlerConcept RequestHandler>
     class Listener final : public std::enable_shared_from_this<Listener<RequestHandler>> {
     public:
         template<typename Handler>

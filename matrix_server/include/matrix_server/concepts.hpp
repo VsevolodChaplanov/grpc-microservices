@@ -7,7 +7,7 @@
 #include <functional>
 #include <type_traits>
 
-namespace http {
+namespace concepts {
 
     namespace {
 
@@ -25,6 +25,6 @@ namespace http {
                                     std::is_nothrow_move_constructible_v<Handler> &&
                                     std::invocable<Handler, request, std::function<response&&>>;
 
-}// namespace http
+}// namespace concepts
 
 #endif
