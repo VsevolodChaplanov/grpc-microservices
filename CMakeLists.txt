@@ -46,6 +46,7 @@ include(Catch)
 
 add_subdirectory(pingpong)
 # add_subdirectory(pingpong_go)
+add_subdirectory(healthcheck_protofiles)
 add_subdirectory(matrix_protofiles)
 add_subdirectory(matrix_server)
 add_subdirectory(matrix_client)
