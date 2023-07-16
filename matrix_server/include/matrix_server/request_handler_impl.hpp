@@ -15,6 +15,7 @@ public:
         MatrixMatrixServiceImpl& matrix_matrix_service,
         MatrixVectorServiceImpl& matrix_vector_service);
 
+    void handle();
 
 private:
     agrpc::GrpcContext& context_;

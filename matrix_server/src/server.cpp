@@ -1,6 +1,7 @@
 #include "matrix_server/server.hpp"
 #include "matrix_server/request_handler_impl.hpp"
 #include <algorithm>
+#include <memory>
 
 MatrixMultiplyerServer::MatrixMultiplyerServer(std::string_view host, std::size_t port,
                                                std::size_t concurrency_hint)
@@ -26,7 +27,6 @@ MatrixMultiplyerServer::MatrixMultiplyerServer(std::string_view host, std::size_
     for (const std::size_t i: std::views::iota(0ul, threads_amount_)) {
         net::post(thread_pool_, [&, i]() {
             auto& grpc_context = *grpc_contexts_[i];
-            RequestHandlerImpl{grpc_context, matrix_matrix_service_, matrix_vector_service_};
             grpc_context.run();
         });
     }
