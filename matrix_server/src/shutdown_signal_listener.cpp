@@ -5,21 +5,20 @@
 
 ShutdownListener::ShutdownListener(grpc::Server& server, agrpc::GrpcContext& listener_context) noexcept
     : server_{server}, signals_(listener_context, SIGINT, SIGTERM) {
-        signals_.async_wait([&] (auto&& ex, [[maybe_unused]] auto&&) {
-            if (ex != boost::asio::error::operation_aborted) {
-                Shutdown();
-            }
-        });
-    }
+    signals_.async_wait([&](auto&& ex, [[maybe_unused]] auto&&) {
+        if (ex != boost::asio::error::operation_aborted) {
+            Shutdown();
+        }
+    });
+}
 
 void ShutdownListener::Shutdown() {
     if (!is_shutdown_.exchange(true)) {
         shutdown_thread_ = std::thread{
-            [&] {
-                signals_.cancel();
-                server_.Shutdown();
-            }
-        };
+                [&] {
+                    signals_.cancel();
+                    server_.Shutdown();
+                }};
     }
 }
 
