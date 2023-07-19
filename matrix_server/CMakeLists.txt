@@ -11,6 +11,8 @@ add_library(${MATRIX_SERVER_LIB} STATIC
 target_include_directories(${MATRIX_SERVER_LIB} PUBLIC
     ${MATRIX_SERVER_INCLUDE_DIR}
     ${MATRIX_SERVER_PROTOFILES_BINARY_DIR}
+    ${HEALTHCHECK_SERVICE_PROTOFILES_BINARY_DIR}
+    ${UTILS_INCLUDE_DIR}
     asio-grpc::asio-grpc
     boost::boost
     fmt::fmt
@@ -18,6 +20,8 @@ target_include_directories(${MATRIX_SERVER_LIB} PUBLIC
 )
 target_link_libraries(${MATRIX_SERVER_LIB} PUBLIC
     ${MATRIX_PROTOLIB}
+    ${HEALTHCHECK_PROTOLIB}
+    ${UTILITY_LIB}
     asio-grpc::asio-grpc
     boost::boost
     fmt::fmt

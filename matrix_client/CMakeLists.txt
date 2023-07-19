@@ -15,9 +15,11 @@ target_include_directories(${MATRIX_CLIENT_LIB} PUBLIC
     boost::boost
     fmt::fmt
     range-v3::range-v3
+    ${HEALTHCHECK_SERVICE_PROTOFILES_BINARY_DIR}
 )
 target_link_libraries(${MATRIX_CLIENT_LIB} PUBLIC
     ${MATRIX_PROTOLIB}
+    ${HEALTHCHECK_PROTOLIB}
     asio-grpc::asio-grpc
     boost::boost
     fmt::fmt
