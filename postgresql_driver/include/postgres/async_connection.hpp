@@ -27,16 +27,21 @@ namespace coro_postgres {
             [[nodiscard]] ConnectionAwaiter await_transform(const std::string& connection_string) {
                 return {connection_string};
             }
+
             [[nodiscard]] AsyncConnection get_return_object() {
                 return {CoroHandle::from_promise(*this)};
             }
+
             // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
             [[nodiscard]] constexpr std::suspend_never initial_suspend() noexcept { return {}; }
+            
             // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
             [[nodiscard]] constexpr std::suspend_always final_suspend() noexcept { return {}; }
+            
             void return_value(DBConnectionPtr connection) {
                 db_connection_ = std::move(connection);
             }
+            
             void unhandled_exception() { db_connection_ = std::current_exception(); }
         };
         struct [[nodiscard]] ConnectionAwaiter final {
